@@ -3,6 +3,7 @@ const responseHandler = require("./middleware/responseHandler");
 const errorHandler = require("./middleware/errorHandler");
 const logger = require("./utils/logger");
 const userRoutes = require("./routes/userRoutes");
+const eventRoutes = require("./routes/eventRoutes");
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/users", userRoutes);
-
+app.use("/api/events", eventRoutes);
 
 app.use(errorHandler);
 

@@ -42,7 +42,7 @@ const registerAdmin = async (req, res) => {
 
   const user = await User.create({name,email,password,role: "admin" });
   logger.debug(`Admin registered:${user.email} - ${user.role}`);
-  
+
   res.created({
     message: "Admin registered successfully",
     data: {
@@ -89,9 +89,25 @@ const getMe = async (req, res) => {
   });
 };
 
+/**
+ * Get events user is registered for
+ * GET /events/
+ */
+const getMyEvents = async (req, res) => {
+  const events = await Event.find({
+    participants: req.user.id,
+  })
+    .sort({ startDateTime: 1 })
+    .select("event_id title startDateTime endDateTime");
+
+  res.ok({ data: events });
+};
+
+
 module.exports = {
   registerUser,
   registerAdmin,
   loginUser,
   getMe,
+  getMyEvents
 };

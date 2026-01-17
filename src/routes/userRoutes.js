@@ -15,6 +15,7 @@ router.post("/register-admin", registerAdmin);
 router.post("/login", loginUser);
 
 // Protected routes
-router.get("/me", authMiddleware, getMe);
+router.get("/profile", authMiddleware, getMe);
+router.get("/events", authMiddleware, getMe);
 
 module.exports = router;
