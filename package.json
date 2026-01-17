@@ -1,0 +1,56 @@
+{
+  "name": "eventmanagement",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yashbansal1437/eventManager.git"
+  },
+  "author": "Yash Bansal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yashbansal1437/eventManager/issues"
+  },
+  "homepage": "https://github.com/yashbansal1437/eventManager#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.4",
+    "nodemon": "^3.1.11"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "html",
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/database/**",
+      "!src/models/**",
+      "!src/middleware/logger.js",
+      "!src/middleware/requestLogger.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 85,
+        "statements": 85
+      }
+    }
+  }
+}
