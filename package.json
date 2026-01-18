@@ -45,6 +45,7 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/database/**",
+      "!src/server.js",
       "!src/middleware/logger.js",
       "!src/middleware/requestLogger.js"
     ],
