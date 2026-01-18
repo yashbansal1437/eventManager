@@ -1,6 +1,7 @@
 const Event = require("../models/eventModel");
 const ApiError = require("../utils/error");
 const logger = require("../utils/logger");
+const { sendEmail } = require("../utils/mailer");
 
 /**
  * Register user for an event
@@ -30,6 +31,25 @@ const registerForEvent = async (req, res) => {
   }
 
   logger.info(`User ${userId} registered for event ${eventId}`);
+
+
+
+  try {
+    const event = await Event.findOne(
+      { event_id: eventId },
+      "title startDateTime"
+    );
+    await sendEmail({
+      to: req.user.email,
+      subject: "Event Registration Confirmed",
+      html: `<p>You are registered for <b>${event.title} at ${event.startDateTime}</b></p>`
+    });
+  } catch (err) {
+    logger.error(
+      `Email failed for user ${userId} on event ${eventId}: ${err.message}`
+    );
+  }
+
 
   res.ok({ message: "Successfully registered for event",
     data: { 
