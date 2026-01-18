@@ -63,6 +63,11 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
 
+    modifiedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
     participants: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -79,11 +84,10 @@ const eventSchema = new mongoose.Schema(
 /**
  * Generate unique event_id before saving
  */
-eventSchema.pre("save", function (next) {
+eventSchema.pre("save", function () {
   if (!this.event_id) {
     this.event_id = nanoid(10);
   }
-  next();
 });
 
 /**

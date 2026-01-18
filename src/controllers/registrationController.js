@@ -31,7 +31,10 @@ const registerForEvent = async (req, res) => {
 
   logger.info(`User ${userId} registered for event ${eventId}`);
 
-  res.ok({ message: "Successfully registered for event" });
+  res.ok({ message: "Successfully registered for event",
+    data: { 
+        event_id: eventId
+     } });
 };
 
 /**
@@ -62,7 +65,11 @@ const deregisterFromEvent = async (req, res) => {
 
   logger.info(`User ${userId} deregistered from event ${eventId}`);
 
-  res.ok({ message: "Successfully deregistered from event" });
+  res.ok({ message: "Successfully deregistered from event",
+    data: { 
+        event_id: eventId
+     } 
+    });
 };
 
 module.exports = {

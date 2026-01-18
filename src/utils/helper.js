@@ -17,8 +17,30 @@ function getTimestamp() {
     .slice(0, 8)}]`;
 }
 
+const eventResponse = (event) => ({
+  event_id: event.event_id,
+  title: event.title,
+  description: event.description,
+  startDateTime: event.startDateTime.toISOString(),
+  endDateTime: event.endDateTime.toISOString(),
+  capacity: event.capacity,
+});
+
+const eventDetailResponse = (event) => ({
+  ...eventResponse(event),
+  participants: event.participants,
+  createdBy: event.createdBy.name,
+  createdByEmail: event.createdBy.email,
+  createdAt: event.createdAt,
+  updatedBy: event.modifiedBy?.email || null,
+  updatedAt: event.updatedAt,
+});
+
+
 module.exports = {
   signToken,
   verifyToken,
-  getTimestamp
+  getTimestamp,
+  eventResponse,
+  eventDetailResponse,
 };
